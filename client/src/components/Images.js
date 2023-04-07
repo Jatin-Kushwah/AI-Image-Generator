@@ -45,8 +45,8 @@ function Images() {
                   `}
                     >
                         <img
-                            height={800}
-                            width={800}
+                            height={802}
+                            width={802}
                             src={image.photo}
                             alt={image._id}
                             className="w-full shadow-2xl rounded-sm drop-shadow-lg"
