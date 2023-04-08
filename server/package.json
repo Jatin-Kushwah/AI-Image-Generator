@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "nodemon index"
+        "start": "cross-env CORS_ORIGIN=http://localhost:3000 nodemon index"
     },
     "keywords": [],
     "author": "",
@@ -18,5 +18,8 @@
         "mongoose": "^7.0.3",
         "nodemon": "^2.0.22",
         "openai": "^3.2.1"
+    },
+    "devDependencies": {
+        "cross-env": "^7.0.3"
     }
 }
