@@ -10,6 +10,15 @@ export const getPosts = createAsyncThunk("/getPosts", async () => {
     }
 });
 
+// export const deletePost = createAsyncThunk("/deletePost", async (body) => {
+//     try {
+//         const response = await axiosClient.delete("/api/post", body);
+//         console.log(response, body);
+//     } catch (error) {
+//         return Promise.reject(error);
+//     }
+// });
+
 const postSlice = createSlice({
     name: "postSlice",
     initialState: {
@@ -19,6 +28,11 @@ const postSlice = createSlice({
         builder.addCase(getPosts.fulfilled, (state, action) => {
             state.posts = action.payload;
         });
+        // builder.addCase(deletePost.fulfilled, (state, action) => {
+        //     state.posts = state.posts.filter(
+        //         (post) => post._id !== action.payload
+        //     );
+        // });
     },
 });
 

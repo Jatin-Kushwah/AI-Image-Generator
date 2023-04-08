@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPosts } from "../redux/slices/PostSlice";
+import { deletePost, getPosts } from "../redux/slices/PostSlice";
+import download from "../assets/download.png";
+import deleteIcon from "../assets/delete.png";
+import FileSaver from "file-saver";
+import axiosClient from "../axisoClient";
 
 function Images() {
     const dispatch = useDispatch();
@@ -26,7 +30,19 @@ function Images() {
         b._id.localeCompare(a._id)
     );
 
-    const downloadImage = (image) => {};
+    const downloadImage = (image, _id) => {
+        FileSaver.saveAs(image, `download-${_id}.jpg`);
+    };
+
+    const deleteImage = async (id) => {
+        try {
+            await axiosClient.delete("/api/post", {
+                data: { id },
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     return (
         <div>
@@ -40,7 +56,7 @@ function Images() {
                 {sortedImages?.map((image, i) => (
                     <div
                         key={image._id}
-                        className={`relative ${
+                        className={`relative group  ${
                             i === 0 && "md:col-span-2 md:row-span-2"
                         } hover:scale-[103%] duration-200 transition-transform ease-in-out
                   
@@ -53,12 +69,22 @@ function Images() {
                             alt={image._id}
                             className="w-full shadow-2xl rounded-sm drop-shadow-lg"
                         />
-                        <button
-                            onClick={() => downloadImage(image)}
-                            className="absolute top-2 right-2 bg-white rounded-md px-2 py-1 text-gray-700 hover:bg-gray-100"
-                        >
-                            Download
-                        </button>
+                        <div className="h-10 flex items-center justify-between absolute opacity-0 transition-opacity duration-200 group-hover:opacity-100 bottom-0 left-0 right-0 bg-white bg-opacity-80 rounded-sm px-2 py-1 text-gray-700 ">
+                            <img
+                                src={deleteIcon}
+                                alt="delete"
+                                className="w-6 h-6 object-contain cursor-pointer hover:scale-[115%] duration-300 transition-transform ease-in-out ml-3"
+                                onClick={() => deleteImage(image._id)}
+                            />
+                            <img
+                                src={download}
+                                alt="download"
+                                className="w-5 h-5 object-contain cursor-pointer hover:scale-[115%] duration-300 transition-transform ease-in-out mr-3"
+                                onClick={() =>
+                                    downloadImage(image.photo, image._id)
+                                }
+                            />
+                        </div>
                     </div>
                 ))}
             </div>
