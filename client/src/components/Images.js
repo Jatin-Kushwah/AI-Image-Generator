@@ -26,6 +26,8 @@ function Images() {
         b._id.localeCompare(a._id)
     );
 
+    const downloadImage = (image) => {};
+
     return (
         <div>
             {generating && (
@@ -51,6 +53,12 @@ function Images() {
                             alt={image._id}
                             className="w-full shadow-2xl rounded-sm drop-shadow-lg"
                         />
+                        <button
+                            onClick={() => downloadImage(image)}
+                            className="absolute top-2 right-2 bg-white rounded-md px-2 py-1 text-gray-700 hover:bg-gray-100"
+                        >
+                            Download
+                        </button>
                     </div>
                 ))}
             </div>

@@ -51,8 +51,8 @@ const getSuggestionsController = async (req, res) => {
             model: "text-davinci-003",
             prompt:
                 prompt ||
-                "Write a random text prompt for DALL·E to generate an image, this prompt will be shown to the user, include details such as the genre and what type of painting it should be, options can include: 4k, abstract, oil painting, watercolor, photo-realistic, modern, black and white etc. Do not wrap the answer in quotes.",
-            max_tokens: 100,
+                "Generate a random text prompt for DALL·E to produce an image. The prompt should provide details about the image's genre and style, such as whether it should be 4K, abstract, oil painting, watercolor, photo-realistic, modern, or black and white. Do not enclose your answer in quotation marks, and avoid using words like 'create,' 'draw,' or 'paint'.",
+            max_tokens: 200,
             temperature: 0.8,
         });
 
