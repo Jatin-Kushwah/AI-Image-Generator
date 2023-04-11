@@ -39,6 +39,7 @@ function Images() {
             await axiosClient.delete("/api/post", {
                 data: { id },
             });
+            await dispatch(getPosts());
         } catch (err) {
             console.log(err);
         }

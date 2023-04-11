@@ -23,9 +23,9 @@ const deleteImageController = async (req, res) => {
             return res.status(404).send("Post not found");
         }
 
-        // Delete image from Cloudinary
-        const publicId = post.photo.match(/\/[^/]*$/)[0].substring(1);
-        await cloudinary.uploader.destroy(publicId);
+        // // Delete image from Cloudinary
+        // const publicId = post.photo.match(/\/[^/]*$/)[0].substring(1);
+        // await cloudinary.uploader.destroy(publicId);
 
         // Delete post from database
         await Post.deleteOne({ _id: id });
